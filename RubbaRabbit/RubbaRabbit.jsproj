@@ -64,10 +64,13 @@
     <Content Include="game-media\failure.mp3" />
     <Content Include="game-media\font.png" />
     <Content Include="game-media\gui.png" />
+    <Content Include="game-media\horse.png" />
+    <Content Include="game-media\horse2.png" />
     <Content Include="game-media\jump.mp3" />
     <Content Include="game-media\level1.js" />
     <Content Include="game-media\level2.js" />
     <Content Include="game-media\level3.js" />
+    <Content Include="game-media\level4.js" />
     <Content Include="game-media\msgbox.png" />
     <Content Include="game-media\music.mp3" />
     <Content Include="game-media\parallax.png" />

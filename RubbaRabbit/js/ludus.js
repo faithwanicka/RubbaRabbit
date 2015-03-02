@@ -141,7 +141,7 @@ THE SOFTWARE.
 
     // levels
     var level = []; // an array of jason level data objects
-    var starting_level_number = 0; // should be zero except when testing
+    var starting_level_number = 3; // should be zero except when testing
     var current_level_number = starting_level_number; // which one are we playing?
     var pendingLevelComplete = false; // do we need to change levels next frame?
     var levelnext = 1; // used for iterating through .js data globals (eg. window.level1)
@@ -177,7 +177,7 @@ THE SOFTWARE.
     var health_gui_spacing = 40;
     var health_spritenum = 178;
     var pickup_score_amount = 25; // how many points we get for touching a pickup
-    var player_can_attack = false; // game specific - is there an attack button? SET IN initLevel based on json data
+    var player_can_attack = true; // game specific - is there an attack button? SET IN initLevel based on json data
     var startx = 292; // changed by the level data
     var starty = 420;
     var enemy_speed = 2; // pixels per 1/60th sec
@@ -657,14 +657,14 @@ THE SOFTWARE.
                 player = new jaws.Sprite({ x: startx, y: starty, anchor: "center_bottom", flipped: true });
 
                 // the animations used by our hero
-                player.animation = new jaws.Animation({ sprite_sheet: jaws.assets.get("player.png"), frame_size: player_framesize, frame_duration: 75 });
-                player.idle_anim = player.animation.slice(8, 9);
-                player.move_anim = player.animation.slice(0, 7);
+                player.animation = new jaws.Animation({ sprite_sheet: jaws.assets.get("horse2.png"), orientation: 'right', frame_size: player_framesize, frame_duration: 75 });
+                player.idle_anim = player.animation.slice(0, 4);
+                player.move_anim = player.animation.slice(4, 12);
                 //player.jump_anim = player.animation.slice(2, 3);
-                player.jump_anim = player.animation.slice(14, 15);
-                player.fall_anim = player.animation.slice(15, 16);
-                player.attack_anim = player.animation.slice(9, 14);
-                player.setImage(player.animation.frames[9]);
+                player.jump_anim = player.animation.slice(12, 16);
+                player.fall_anim = player.animation.slice(17, 18);
+                player.attack_anim = player.animation.slice(12, 16);
+                player.setImage(player.animation.frames[0]);
                 //NOP: player.top_offset++; // nudge one pixel down to account for physics "nudge"
 
                 // the collision bounding box is smaller than the DRAWING rect
@@ -813,8 +813,8 @@ THE SOFTWARE.
                     player.attacking = true;
                 }
 
-                if (touchleft || jaws.pressed("left") || jaws.pressed("a")) { player.vx = -move_speed; player.flipped = 1; }
-                else if (touchright || jaws.pressed("right") || jaws.pressed("d")) { player.vx = +move_speed; player.flipped = 0; }
+                if (touchleft || jaws.pressed("left") || jaws.pressed("a")) { player.vx = -move_speed; player.flipped = 0; }
+                else if (touchright || jaws.pressed("right") || jaws.pressed("d")) { player.vx = +move_speed; player.flipped = 1; }
 
                 if (!player.attacking && (touchjump || jaws.pressed("up") || jaws.pressed("w") || jaws.pressed("space"))) { if (!player.jumping && player.can_jump) { sfxjump(); player.vy = jump_strength; player.jumping = true; player.can_jump = false; } }
                 else { player.can_jump = true; }
@@ -2122,7 +2122,7 @@ THE SOFTWARE.
 
         // start downloading all the art using a preloader progress screen
         jaws.assets.root = "game-media/";
-        jaws.assets.add(["titlescreen.png", "gui.png", "font.png", "parallax.png", "player.png", "particles.png", "tiles.png", "msgbox.png", "enemies.png"]);
+        jaws.assets.add(["titlescreen.png", "gui.png", "font.png", "parallax.png", "horse2.png", "particles.png", "tiles.png", "msgbox.png", "enemies.png"]);
 
         // once the art has been loaded we will create an instance of this class
         // and begin by running its setup function, then the update/draw loop
